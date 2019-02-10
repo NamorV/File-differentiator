@@ -7,10 +7,11 @@ import java.nio.file.Files;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        File file = new File("tenor.gif");
+        File file = new File("tenor.txt");
         byte[] fileContent = Files.readAllBytes(file.toPath());
         Differentiator differentiator = new Differentiator();
-
-        differentiator.validate(fileContent);
+        String name = file.getName();
+        String extension = name.substring(name.lastIndexOf("."));
+        differentiator.validate(fileContent, extension);
     }
 }
