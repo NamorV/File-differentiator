@@ -7,9 +7,13 @@ import java.util.Arrays;
 
 public class Main {
     private static final byte[] JPG_MAGIC_NUMBER = {(byte) 0xFF, (byte) 0xD8, (byte) 0xFF};
+    private static final byte[] GIF_MAGIC_NUMBER1 = {(byte) 0x47, (byte) 0x49, (byte) 0x46, (byte) 0x38,
+            (byte) 0x39, (byte) 0x61};
+    private static final byte[] GIF_MAGIC_NUMBER2 = {(byte) 0x47, (byte) 0x49, (byte) 0x46, (byte) 0x38,
+            (byte) 0x37, (byte) 0x61};
 
     public static void main(String[] args) throws IOException {
-        File file = new File("a.jpg");
+        File file = new File("tenor.gif");
         byte[] fileContent = Files.readAllBytes(file.toPath());
 
         byte[] actualMagicNumber = new byte[JPG_MAGIC_NUMBER.length];
@@ -20,6 +24,17 @@ public class Main {
 
         if(Arrays.equals(actualMagicNumber, JPG_MAGIC_NUMBER)) {
             System.out.println("Its JPG!");
+        }
+
+        actualMagicNumber = new byte[GIF_MAGIC_NUMBER1.length];
+
+        for(int i = 0; i < GIF_MAGIC_NUMBER1.length; i++) {
+            actualMagicNumber[i] = fileContent[i];
+        }
+
+        if((Arrays.equals(actualMagicNumber, GIF_MAGIC_NUMBER1)) ||
+                (Arrays.equals(actualMagicNumber, GIF_MAGIC_NUMBER2))) {
+            System.out.println("Its GIF!");
         }
     }
 }
