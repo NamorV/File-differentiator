@@ -8,14 +8,22 @@ public class Differentiator {
             (byte) 0x39, (byte) 0x61};
     private static final byte[] GIF_MAGIC_NUMBER2 = {(byte) 0x47, (byte) 0x49, (byte) 0x46, (byte) 0x38,
             (byte) 0x37, (byte) 0x61};
+    private static String JPG_EXTENSION = ".jpg";
+    private static String GIF_EXTENSION = ".gif";
+    private static String TXT_EXTENSION = ".txt";
 
     public void validate(byte[] fileContent, String extension) {
+
+        if(!extension.equals(JPG_EXTENSION) || !extension.equals(GIF_EXTENSION) || !extension.equals(TXT_EXTENSION)) {
+            throw new WrongExtensionException("This program don't handle such extension!");
+        }
+
         if(isJPG(fileContent)) {
-            validateExtension(extension, ".jpg");
+            validateExtension(extension, JPG_EXTENSION);
         } else if(isGIF(fileContent)) {
-            validateExtension(extension, ".gif");
+            validateExtension(extension, GIF_EXTENSION);
         } else {
-            validateExtension(extension, ".txt"); //files with txt don't have magic numbers
+            validateExtension(extension, TXT_EXTENSION); //files with txt don't have magic numbers
         }
     }
 
@@ -52,7 +60,8 @@ public class Differentiator {
         if(currentExtension.equals(realExtension)) {
             System.out.println("Yes, this is " + currentExtension + " file.");
         } else {
-            System.out.println("Extension is " + currentExtension + ", while actually it's a " + realExtension);
+            throw new WrongExtensionException("Extension is " + currentExtension +
+                                                ", while actually it's a " + realExtension);
         }
     }
 }

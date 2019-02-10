@@ -22,7 +22,7 @@ public class Main {
                 fileReader.getFileByName(line);
                 differentiator.validate(fileReader.getFileContent(), fileReader.getExtension());
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                System.out.println(e);
             } finally {
                 continue;
             }
