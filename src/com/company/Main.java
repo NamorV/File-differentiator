@@ -1,14 +1,31 @@
 package com.company;
 
-import java.io.IOException;
+import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
         FileReader fileReader = new FileReader();
         Differentiator differentiator = new Differentiator();
-        fileReader.getFileByName("a.txt");
 
-        differentiator.validate(fileReader.getFileContent(), fileReader.getExtension());
+        System.out.println("Type file name or q to exit.");
+
+        while(true) {
+            String line = scanner.nextLine();
+
+            if(line.equals("q")) {
+                System.exit(0);
+            }
+
+            try {
+                fileReader.getFileByName(line);
+                differentiator.validate(fileReader.getFileContent(), fileReader.getExtension());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            } finally {
+                continue;
+            }
+        }
     }
 }
