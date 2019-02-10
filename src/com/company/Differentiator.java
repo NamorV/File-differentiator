@@ -14,7 +14,7 @@ public class Differentiator {
 
     public void validate(byte[] fileContent, String extension) {
 
-        if(!extension.equals(JPG_EXTENSION) || !extension.equals(GIF_EXTENSION) || !extension.equals(TXT_EXTENSION)) {
+        if(!extension.equals(JPG_EXTENSION) && !extension.equals(GIF_EXTENSION) && !extension.equals(TXT_EXTENSION)) {
             throw new WrongExtensionException("This program don't handle such extension!");
         }
 

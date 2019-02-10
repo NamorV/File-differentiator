@@ -36,7 +36,7 @@ public class FileReader {
         file = new File(fileName);
 
         if(!file.exists()) {
-            throw new Exception("There is no such file!");
+            throw new RuntimeException("There is no such file!");
         }
 
         fileContent = Files.readAllBytes(file.toPath());
